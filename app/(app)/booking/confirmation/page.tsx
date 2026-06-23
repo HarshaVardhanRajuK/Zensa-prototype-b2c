@@ -10,7 +10,7 @@ import { useToast } from "@/components/providers/toast-provider";
 import { getBusiness, getService } from "@/lib/mock";
 import { cn } from "@/lib/utils";
 
-export default function BookingConfirmationPage() {
+function ConfirmationContent() {
   const search = useSearchParams();
   const router = useRouter();
   const { toast } = useToast();
@@ -139,5 +139,13 @@ export default function BookingConfirmationPage() {
         </Link>
       </FlowFooter>
     </div>
+  );
+}
+
+export default function BookingConfirmationPage() {
+  return (
+    <React.Suspense fallback={<div className="flex min-h-[100dvh] items-center justify-center text-sm text-muted-foreground">Loading...</div>}>
+      <ConfirmationContent />
+    </React.Suspense>
   );
 }
