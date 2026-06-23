@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Zensa Consumer — design language.
+ * Calm, premium, human, wellness-first. Warm off-white "paper" surfaces,
+ * a restorative sage/eucalyptus primary, a soft clay accent for warmth,
+ * and a quiet gold for trust/rewards. Large radii, generous space, soft depth.
+ * Tokens ONLY — never hardcode colours in components.
+ */
+
+@layer base {
+  :root {
+    --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+
+    /* Surfaces — warm paper, not clinical white */
+    --background: 40 32% 97.5%;
+    --foreground: 155 16% 16%;
+    --card: 40 40% 99.5%;
+    --card-foreground: 155 16% 16%;
+    --popover: 40 40% 99.5%;
+    --popover-foreground: 155 16% 16%;
+
+    /* Neutral warm scale */
+    --muted: 40 18% 93%;
+    --muted-foreground: 150 8% 42%;
+    --border: 40 16% 88%;
+    --input: 40 16% 88%;
+    --ring: 156 32% 38%;
+
+    /* Primary — sage / eucalyptus */
+    --primary: 156 33% 34%;
+    --primary-foreground: 40 40% 99%;
+    --primary-soft: 156 30% 92%;
+
+    /* Secondary — quiet warm fill for chips/secondary buttons */
+    --secondary: 40 22% 92%;
+    --secondary-foreground: 155 18% 24%;
+    --accent: 156 26% 90%;
+    --accent-foreground: 156 36% 24%;
+
+    /* Clay — warm coral accent, used sparingly for highlights/journey */
+    --clay: 16 54% 56%;
+    --clay-foreground: 40 40% 99%;
+    --clay-soft: 18 64% 93%;
+
+    /* Gold — trust, loyalty, milestones */
+    --gold: 38 58% 50%;
+    --gold-foreground: 40 40% 99%;
+
+    /* Semantic status */
+    --success: 152 46% 36%;
+    --success-foreground: 40 40% 99%;
+    --warning: 32 78% 46%;
+    --warning-foreground: 40 40% 99%;
+    --info: 204 58% 44%;
+    --info-foreground: 40 40% 99%;
+    --destructive: 4 64% 50%;
+    --destructive-foreground: 40 40% 99%;
+
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 158 18% 8%;
+    --foreground: 40 20% 92%;
+    --card: 158 15% 11.5%;
+    --card-foreground: 40 20% 92%;
+    --popover: 158 15% 11.5%;
+    --popover-foreground: 40 20% 92%;
+    --muted: 158 12% 16%;
+    --muted-foreground: 150 8% 62%;
+    --border: 158 12% 19%;
+    --input: 158 12% 21%;
+    --ring: 156 36% 50%;
+    --primary: 156 38% 52%;
+    --primary-foreground: 158 24% 8%;
+    --primary-soft: 156 24% 18%;
+    --secondary: 158 12% 17%;
+    --secondary-foreground: 40 18% 88%;
+    --accent: 156 18% 19%;
+    --accent-foreground: 156 32% 80%;
+    --clay: 16 58% 62%;
+    --clay-foreground: 158 24% 8%;
+    --clay-soft: 16 24% 20%;
+    --gold: 38 62% 58%;
+    --gold-foreground: 158 24% 8%;
+    --success: 152 42% 48%;
+    --success-foreground: 158 24% 8%;
+    --warning: 32 72% 56%;
+    --warning-foreground: 158 24% 8%;
+    --info: 204 58% 58%;
+    --info-foreground: 158 24% 8%;
+    --destructive: 4 62% 58%;
+    --destructive-foreground: 40 40% 99%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .font-display {
+    font-optical-sizing: auto;
+    letter-spacing: -0.01em;
+  }
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbars on horizontal carousels while staying scrollable */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border));
+    border-radius: 9999px;
+  }
+
+  /* Safe-area helpers for the mobile shell */
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  /* Edge-to-edge horizontal scroller that still respects the app gutter */
+  .edge-scroll {
+    scroll-snap-type: x mandatory;
+  }
+  .edge-scroll > * {
+    scroll-snap-align: start;
+  }
+
+  /* Subtle skeleton shimmer */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+  .shimmer::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      hsl(var(--foreground) / 0.05),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

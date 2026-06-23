@@ -1,0 +1,31 @@
+# dependencies
+node_modules
+.pnp
+.pnp.js
+
+# next.js
+.next
+out
+
+# build artifacts
+*.tsbuildinfo
+next-env.d.ts
+
+# claude
+.claude
+
+# environment variables (CRITICAL — secrets)
+.env
+.env*.local
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# turbo
+.turbo
