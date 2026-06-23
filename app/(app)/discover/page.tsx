@@ -74,7 +74,7 @@ function recommendedScore(b: Business): number {
   return b.rating * 2 + (b.verified ? 1 : 0) - (b.distanceKm === 0 ? 5 : 0);
 }
 
-export default function DiscoverPage() {
+function DiscoverContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { toast } = useToast();
@@ -510,5 +510,13 @@ function FilterDrawer({
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
+  );
+}
+
+export default function DiscoverPage() {
+  return (
+    <React.Suspense fallback={<div className="flex min-h-[100dvh] items-center justify-center text-sm text-muted-foreground">Loading...</div>}>
+      <DiscoverContent />
+    </React.Suspense>
   );
 }
